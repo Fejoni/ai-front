@@ -9,7 +9,7 @@ export default {
         return api.post('http://ai.test:8000/login', params)
     },
     logout() {
-        return api.delete('http://ai.test:8000/logout')
+        return api.post('http://ai.test:8000/logout')
     },
 
     getPosts() {
