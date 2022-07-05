@@ -1,6 +1,8 @@
 <template>
   <nav>
+    <p v-if="name">Вы зашли как: <b style="color: brown">{{ name }}</b> </p>
     <router-link to="/login">login</router-link> |
+    <router-link to="/register">Register</router-link> |
     <router-link to="/home">home</router-link> |
     <router-link to="/about">about</router-link> |
     <button type="submit" @click="logout">Выйти</button>
@@ -35,7 +37,16 @@ import api from "@/api/api";
 
 export default {
   name: "App",
-
+  data() {
+    return {
+      name: null,
+    }
+  },
+  mounted() {
+    api.get('http://ai.test:8000/api/user').then(res => {
+      this.name = res.data.name
+    })
+  },
   methods: {
     logout() {
       api.post('http://ai.test:8000/logout').then(res => {
