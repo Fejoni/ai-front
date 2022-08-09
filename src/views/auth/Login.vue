@@ -13,9 +13,7 @@
 </template>
 
 <script>
-import axios from "axios";
 import api from "@/api/api";
-import HomeView from "@/views/HomeView";
 
 export default {
   name: "Login",
@@ -30,13 +28,16 @@ export default {
   },
   methods: {
     login() {
-        api.get('http://ai.test:8000/sanctum/csrf-cookie').then(res => {
-          return api.post('http://ai.test:8000/login', {
+        api.get('sanctum/csrf-cookie').then(res => {
+          return api.post('login', {
             email: this.email,
             password: this.password,
           }).then(res2 => {
-            localStorage.setItem('isLoggedIn', 'true')
-            this.$router.push({ name: 'about' })
+            return api.get('api/v1/user').then(res3 => {
+              localStorage.setItem('user', JSON.stringify(res3.data))
+              localStorage.setItem('isLoggedIn', 'true')
+              this.$router.push({ name: 'about' })
+            })
           }).catch(error => {
             const key = Object.keys(error.response.data.errors)[0]
             this.errorMessage = error.response.data.errors[key][0]
@@ -44,12 +45,12 @@ export default {
         })
     },
     get() {
-      api.get('http://ai.test:8000/api/user').then(res3 => {
+      api.get('api/v1/user').then(res3 => {
         this.name = res3.data.email
       })
     },
     logout() {
-      api.post('http://ai.test:8000/logout').then(res => {
+      api.post('logout').then(res => {
         localStorage.removeItem('isLoggedIn')
         this.$router.push({ name: 'Home' })
       })

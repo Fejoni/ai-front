@@ -2,17 +2,17 @@ import api from "./api";
 
 export default {
     createSession() {
-        return api.get('http://ai.test:8000/sanctum/csrf-cookie')
+        return api.get('sanctum/csrf-cookie')
     },
 
     login(params) {
-        return api.post('http://ai.test:8000/login', params)
+        return api.post('login', params)
     },
     logout() {
-        return api.post('http://ai.test:8000/logout')
+        return api.post('logout')
     },
 
     getPosts() {
-        return api.get('http://ai.test:8000/api/get');
+        return api.get('api/v1/get');
     },
 };

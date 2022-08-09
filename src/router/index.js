@@ -3,6 +3,9 @@ import HomeView from '../views/HomeView.vue'
 import Login from "@/views/auth/Login";
 import Register from "@/views/auth/Register";
 import Admin from "@/views/admin/admin";
+import Post from "@/views/admin/post/Post";
+import PostCreate from "@/views/admin/post/PostCreate";
+import ViewPost from "@/components/Post/ViewPost";
 
 const routes = [
   {
@@ -11,18 +14,49 @@ const routes = [
     component: HomeView,
 
   },
+
   {
     path: '/login',
     name: 'login',
     component: Login,
     meta: { requiresVisitor: true }
   },
+
+  {
+    path: '/admin',
+    name: 'admin',
+    component: Admin,
+    meta: { requiresAuth: true }
+  },
+
   {
     path: '/register',
     name: 'register',
     component: Register,
     meta: { requiresVisitor: true }
   },
+
+  {
+    path: '/admin/posts',
+    name: 'post',
+    component: Post,
+    meta: { requiresAuth: true }
+  },
+
+  {
+    path: '/admin/post/:id',
+    name: 'ViewPost',
+    component: ViewPost,
+    meta: { requiresAuth: true }
+  },
+
+  {
+    path: '/admin/post/create',
+    name: 'postCreate',
+    component: PostCreate,
+    meta: { requiresAuth: true }
+  },
+
   {
     path: '/about',
     name: 'about',

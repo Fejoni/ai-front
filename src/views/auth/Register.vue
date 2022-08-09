@@ -25,8 +25,8 @@ export default {
   },
   methods: {
     test() {
-      api.get('http://ai.test:8000/sanctum/csrf-cookie').then(res => {
-        api.post('http://ai.test:8000/register', {
+      api.get('sanctum/csrf-cookie').then(res => {
+        api.post('register', {
           name: this.name,
           email: this.email,
           password: this.password,

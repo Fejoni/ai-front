@@ -1,16 +1,24 @@
 <template>
-  <nav>
-    <p v-if="name">Вы зашли как: <b style="color: brown">{{ name }}</b> </p>
-    <router-link to="/login">login</router-link> |
-    <router-link to="/register">Register</router-link> |
-    <router-link to="/home">home</router-link> |
-    <router-link to="/about">about</router-link> |
-    <button type="submit" @click="logout">Выйти</button>
-  </nav>
-  <router-view/>
+  <Header></Header>
+  <div class="container">
+    <div class="row">
+      <div class="col-2">
+        <Aside></Aside>
+      </div>
+      <div class="col-10">
+        <router-view></router-view>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style>
+
+* {
+  color: white;
+  background-color: #101010;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -25,36 +33,25 @@ nav {
 
 nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: #ffffff;
+  text-decoration: none;
 }
 
-nav a.router-link-exact-active {
-  color: #42b983;
+nav a:hover {
+  color: #949494;
 }
+
 </style>
 <script>
-import api from "@/api/api";
+import Header from "@/components/layout/Header";
+import Aside from "@/components/layout/Aside";
 
 export default {
   name: "App",
-  data() {
-    return {
-      name: null,
-    }
+
+  components: {
+    Header, Aside
   },
-  mounted() {
-    api.get('http://ai.test:8000/api/user').then(res => {
-      this.name = res.data.name
-    })
-  },
-  methods: {
-    logout() {
-      api.post('http://ai.test:8000/logout').then(res => {
-        localStorage.removeItem('isLoggedIn')
-        this.$router.push({name: 'home'})
-      })
-    }
-  }
 }
 
 </script>

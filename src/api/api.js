@@ -2,6 +2,7 @@ import axios from "axios";
 
 let instance = axios.create({
     withCredentials: true,
+    baseURL: 'http://ai.test:8000/'
 });
 
 instance.interceptors.request.use(request => {
