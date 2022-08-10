@@ -1,15 +1,22 @@
 <template>
-  <Header></Header>
-  <div class="container">
-    <div class="row">
-      <div class="col-2">
-        <Aside></Aside>
-      </div>
-      <div class="col-10">
-        <router-view></router-view>
-      </div>
-    </div>
+
+  <div id="app">
+    <!--Динамический компонент-->
+    <component :is="layout">
+      <router-view/>
+    </component>
   </div>
+<!--  <Header></Header>-->
+<!--  <div class="container">-->
+<!--    <div class="row">-->
+<!--      <div class="col-2">-->
+<!--        <Aside></Aside>-->
+<!--      </div>-->
+<!--      <div class="col-10">-->
+<!--        <router-view></router-view>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
 </template>
 
 <style>
@@ -43,15 +50,23 @@ nav a:hover {
 
 </style>
 <script>
-import Header from "@/components/layout/Header";
-import Aside from "@/components/layout/Aside";
+import Header from "@/components/layouts/Header";
+import Aside from "@/components/layouts/Aside";
 
 export default {
   name: "App",
 
-  components: {
-    Header, Aside
-  },
+  computed: {
+    //Это самое вычисляемое свойство
+    layout(){
+      //Вернем имя шаблона из роута или дефолтное значение
+      //(шаблон для страниц, для которых мы не указали шаблон)
+      return this.$route.meta.layout || "default-layout"
+    }
+  }
+  // components: {
+  //   Header, Aside
+  // },
 }
 
 </script>

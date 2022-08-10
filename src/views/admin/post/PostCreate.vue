@@ -1,5 +1,5 @@
 <template>
-  <router-link to="/admin/posts" class="text-decoration-none btn btn-outline-primary btn-sm mb-3 me-3">Назад </router-link>
+  <router-link to="/admin/posts" class="text-decoration-none btn btn-outline-primary btn-sm mb-3 me-3">Назад</router-link>
 
   <form action="#" method="post" class="mt-3">
     <div class="w-50" style="width: 50%; margin: 0 auto;">

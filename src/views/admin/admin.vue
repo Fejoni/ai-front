@@ -10,7 +10,7 @@
 <script>
 import CreateTheme from "@/components/Post/CreateTheme";
 import CreateSubject from "@/components/Post/CreateSubject";
-import Aside from "@/components/layout/Aside";
+import Aside from "@/components/layouts/Aside";
 export default {
   name: "admin",
   components: {

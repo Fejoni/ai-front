@@ -1,18 +1,43 @@
 <template>
-<div>
-  <form action="#" method="POST">
-    <div v-if="errorMessage">{{ errorMessage }}</div>
-    <input v-model="email" type="email" placeholder="email">
-    <input v-model="password" type="password" placeholder="password">
-    <button class="btn btn-danger" type="submit" @click.prevent="login">Проверить</button>
-  </form>
-  <button type="submit" @click.prevent="get">Получить</button>
-  <button type="submit" @click.prevent="logout">Выйти</button>
-  <p>Почта: {{ name }}</p>
-</div>
+
+  <div class="container">
+    <main>
+      <div class="login__recovery mainColor">
+        <div class="login__recovery__block mainColor">
+          <div class="login__recovery__name mainColor">
+            <div class="logo mainColor">
+              <img class="mainColor logoImg" :src="logoAuth" alt="logo">
+              <h3 class="mainColor">Assistant-IT</h3>
+            </div>
+            <p class="mainColor">Войдите в свой аккаунт</p>
+          </div>
+          <form action="#" method="POST" class="mainColor">
+            <div class="mainColor" v-if="errorMessage">{{ errorMessage }}</div>
+            <input class="mainColor" v-model="email" type="email" placeholder="email">
+            <input class="mainColor" v-model="password" type="password" placeholder="password">
+            <button class="btn btn-danger mainColor" type="submit" @click.prevent="login">Войти</button>
+          </form>
+          <a class="mainColor" href="#">Забыли пароль ?</a>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!--<div>-->
+  <!--  <form action="#" method="POST">-->
+  <!--    <div v-if="errorMessage">{{ errorMessage }}</div>-->
+  <!--    <input v-model="email" type="email" placeholder="email">-->
+  <!--    <input v-model="password" type="password" placeholder="password">-->
+  <!--    <button class="btn btn-danger" type="submit" @click.prevent="login">Проверить</button>-->
+  <!--  </form>-->
+  <!--  <button type="submit" @click.prevent="get">Получить</button>-->
+  <!--  <button type="submit" @click.prevent="logout">Выйти</button>-->
+  <!--  <p>Почта: {{ name }}</p>-->
+  <!--</div>-->
 </template>
 
 <script>
+import logoAuth from "@/assets/logoAuth.svg";
 import api from "@/api/api";
 
 export default {
@@ -26,23 +51,29 @@ export default {
       errorMessage: null,
     }
   },
+
+  setup() {
+    return {
+      logoAuth
+    };
+  },
   methods: {
     login() {
-        api.get('sanctum/csrf-cookie').then(res => {
-          return api.post('login', {
-            email: this.email,
-            password: this.password,
-          }).then(res2 => {
-            return api.get('api/v1/user').then(res3 => {
-              localStorage.setItem('user', JSON.stringify(res3.data))
-              localStorage.setItem('isLoggedIn', 'true')
-              this.$router.push({ name: 'about' })
-            })
-          }).catch(error => {
-            const key = Object.keys(error.response.data.errors)[0]
-            this.errorMessage = error.response.data.errors[key][0]
+      api.get('sanctum/csrf-cookie').then(res => {
+        return api.post('login', {
+          email: this.email,
+          password: this.password,
+        }).then(res2 => {
+          return api.get('api/v1/user').then(res3 => {
+            localStorage.setItem('user', JSON.stringify(res3.data))
+            localStorage.setItem('isLoggedIn', 'true')
+            this.$router.push({name: 'about'})
           })
+        }).catch(error => {
+          const key = Object.keys(error.response.data.errors)[0]
+          this.errorMessage = error.response.data.errors[key][0]
         })
+      })
     },
     get() {
       api.get('api/v1/user').then(res3 => {
@@ -52,7 +83,7 @@ export default {
     logout() {
       api.post('logout').then(res => {
         localStorage.removeItem('isLoggedIn')
-        this.$router.push({ name: 'Home' })
+        this.$router.push({name: 'Home'})
       })
     }
   }
@@ -60,5 +91,138 @@ export default {
 </script>
 
 <style scoped>
+
+.logoImg {
+  position: relative;
+  right: 75px;
+}
+
+input {
+  outline: none;
+}
+
+.mainColor {
+  background-color: #191919;
+}
+
+main {
+  margin-top: 35px;
+}
+
+.login__recovery {
+  background: #252525;
+  border-radius: 10px;
+  width: 316px;
+  height: 490px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.login__recovery__block {
+  width: 100%;
+  text-align: center;
+  height: 100%;
+  background: #191919;
+  border-radius: 10px;
+}
+
+.login__recovery__name .logo {
+  margin: 0;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23px;
+  padding-top: 63px;
+  color: #FFFFFF;
+}
+
+.login__recovery__name p {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: #949494;
+  padding-top: 10px;
+  margin: 0;
+}
+
+.login__recovery__block {
+  position: relative;
+}
+
+.login__recovery__block input {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 15px;
+  margin-top: 20px;
+  color: #949494;
+  background: none;
+  padding: 10px 10px 10px 0;
+  border: 0;
+  border-bottom: 1px solid white;
+}
+
+.login__recovery__block button {
+  width: 196px;
+  height: 30px;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 15px;
+  color: #FFFFFF;
+  background: #00BA78;
+  border-radius: 15px;
+  border: 0;
+  margin-top: 30px;
+}
+
+.login__recovery__block a {
+  display: block;
+  position: absolute;
+  bottom: 38px;
+  width: 100%;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 15px;
+  text-decoration: none;
+  color: #949494;
+}
+
+label {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 15px;
+  color: #D6D6D6;
+  right: 37px;
+  position: relative;
+  margin-top: 20px;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+label {
+  padding-left: 20px;
+}
+
+label::before {
+  content: '';
+  width: 15px;
+  height: 15px;
+  background: #000000;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+  transition: 0.2s;
+}
+
+input[type="checkbox"]:checked + label::before {
+  content: '\2713';
+}
+
+@media (max-width: 700px) {
+  .login__recovery {
+    width: 290px;
+    height: 435px;
+  }
+}
 
 </style>

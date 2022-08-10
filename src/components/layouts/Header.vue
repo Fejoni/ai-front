@@ -29,7 +29,7 @@
             </a>
           </div>
           <div class="collapse navbar-collapse mainColorHeader" id="navbarTogglerDemo01">
-            <router-link class="mainColorHeader" to="/home"><span class="mainColorHeader"><img class="logo" src="@/assets/logo.png">
+            <router-link class="mainColorHeader" to="/home"><span class="mainColorHeader"><img class="logo" :src="logo">
                 <p class="logo-text mainColorHeader">Assistant-IT</p></span>
             </router-link>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -73,6 +73,7 @@
 </template>
 
 <script>
+import logo from "@/assets/logo.svg";
 import api from "@/api/api";
 
 export default {
@@ -83,6 +84,13 @@ export default {
       name: null,
     }
   },
+
+  setup() {
+    return {
+      logo
+    };
+  },
+
   mounted() {
     api.get('api/v1/user').then(res => {
       this.name = res.data.name

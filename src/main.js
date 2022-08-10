@@ -14,7 +14,18 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'bootstrap/dist/js/bootstrap.js'
 import 'bootstrap-vue/dist/bootstrap-vue.js'
 
-createApp(App).use(store).use(router).use(VueAxios,axios).mount('#app')
+// Components
+import Default from "@/layouts/Default";
+import Auth from "@/layouts/Auth";
+
+
+createApp(App)
+    .use(store)
+    .use(router)
+    .use(VueAxios,axios)
+    .component("default-layout", Default)
+    .component("auth-layout", Auth)
+    .mount('#app')
 
 function isLoggedIn() {
     return localStorage.getItem('isLoggedIn')
