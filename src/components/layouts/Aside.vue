@@ -116,6 +116,7 @@ ul li {
   font-size: 13px;
   line-height: 15px;
   color: #949494;
+  text-align: left;
 }
 
 .post-guidance li {
