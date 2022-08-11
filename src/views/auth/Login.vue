@@ -7,14 +7,14 @@
           <div class="login__recovery__name mainColor">
             <div class="logo mainColor">
               <img class="mainColor logoImg" :src="logoAuth" alt="logo">
-              <h3 class="mainColor">Assistant-IT</h3>
+              <h3 class="mainColor logoText">Assistant-IT</h3>
             </div>
             <p class="mainColor">Войдите в свой аккаунт</p>
           </div>
           <form action="#" method="POST" class="mainColor">
             <div class="mainColor" v-if="errorMessage">{{ errorMessage }}</div>
-            <input class="mainColor" v-model="email" type="email" placeholder="email">
-            <input class="mainColor" v-model="password" type="password" placeholder="password">
+            <input class="mainColor" v-model="email" type="email" placeholder="E-mail">
+            <input class="mainColor" v-model="password" type="password" placeholder="Password">
             <button class="btn btn-danger mainColor" type="submit" @click.prevent="login">Войти</button>
           </form>
           <a class="mainColor" href="#">Забыли пароль ?</a>
@@ -22,18 +22,6 @@
       </div>
     </main>
   </div>
-
-  <!--<div>-->
-  <!--  <form action="#" method="POST">-->
-  <!--    <div v-if="errorMessage">{{ errorMessage }}</div>-->
-  <!--    <input v-model="email" type="email" placeholder="email">-->
-  <!--    <input v-model="password" type="password" placeholder="password">-->
-  <!--    <button class="btn btn-danger" type="submit" @click.prevent="login">Проверить</button>-->
-  <!--  </form>-->
-  <!--  <button type="submit" @click.prevent="get">Получить</button>-->
-  <!--  <button type="submit" @click.prevent="logout">Выйти</button>-->
-  <!--  <p>Почта: {{ name }}</p>-->
-  <!--</div>-->
 </template>
 
 <script>
@@ -57,6 +45,7 @@ export default {
       logoAuth
     };
   },
+
   methods: {
     login() {
       api.get('sanctum/csrf-cookie').then(res => {
@@ -75,11 +64,13 @@ export default {
         })
       })
     },
+
     get() {
       api.get('api/v1/user').then(res3 => {
         this.name = res3.data.email
       })
     },
+
     logout() {
       api.post('logout').then(res => {
         localStorage.removeItem('isLoggedIn')
@@ -92,9 +83,15 @@ export default {
 
 <style scoped>
 
+.logoText {
+  font-weight: 500;
+  font-size: 23px;
+  line-height: 23px;
+}
+
 .logoImg {
   position: relative;
-  right: 75px;
+  right: 67px;
 }
 
 input {
@@ -126,11 +123,8 @@ main {
   border-radius: 10px;
 }
 
-.login__recovery__name .logo {
+.login__recovery__name {
   margin: 0;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 23px;
   padding-top: 63px;
   color: #FFFFFF;
 }

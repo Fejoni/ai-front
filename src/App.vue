@@ -34,20 +34,6 @@
   color: #2c3e50;
 }
 
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #ffffff;
-  text-decoration: none;
-}
-
-nav a:hover {
-  color: #949494;
-}
-
 </style>
 <script>
 import Header from "@/components/layouts/Header";

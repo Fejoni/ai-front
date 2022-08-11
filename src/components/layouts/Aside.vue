@@ -1,95 +1,30 @@
 <template>
-
-  <div class="aside col-xl-2">
-    <aside>
-      <button type="button" class="button">Создать пост</button>
-      <div class="post__selection">
-        <div class="post__selection__input">
-              <span>
-                <input
-                    class="form-check-input mt-0 border-white bg-dark"
-                    type="checkbox"
-                    value=""
-                    aria-label="Checkbox for following text input"
-                />
-                <p class="post__selection__text">Все обсуждения</p>
-              </span>
+  <div class="row">
+    <div class="col-xl-2">
+      <div class="aside-menu mainColor">
+        <div class="create-a__post mainColor">
+          <button type="button">Создать пост</button>
         </div>
-        <div class="post__selection__input">
-              <span>
-                <input
-                    class="form-check-input mt-0 border-white bg-dark"
-                    type="checkbox"
-                    value=""
-                    aria-label="Checkbox for following text input"
-                />
-                <p class="post__selection__text">Мои темы</p>
-              </span>
+        <div class="posts mainColor">
+          <ul class="post-main post-guidance mainColor">
+            <li class="mainColor"><a class="aside-link mainColor" href="#">Все обсуждения</a></li>
+            <li class="mainColor"><a class="aside-link mainColor" href="#">Мои темы</a></li>
+          </ul>
+          <ul v-for="aside in asides" :key="aside.id" class="post-branches post-guidance mainColor">
+            <p class="name-post mainColor">{{ aside.title }}</p>
+              <li v-for="subject in aside.subjects" :key="subject.id" class="mainColor"><router-link to="#" class="aside-link mainColor">{{ subject.title }}</router-link></li>
+          </ul>
         </div>
       </div>
-      <div class="language__selection">
-        <p class="language__selection__name">Основы</p>
-        <div class="post__selection__input">
-              <span>
-                <input
-                    class="form-check-input mt-0 border-white bg-dark"
-                    type="checkbox"
-                    value=""
-                    aria-label="Checkbox for following text input"
-                />
-                <p class="post__selection__text">Все обсуждения</p>
-              </span>
-        </div>
-        <div class="post__selection__input">
-              <span>
-                <input
-                    class="form-check-input mt-0 border-white bg-dark"
-                    type="checkbox"
-                    value=""
-                    aria-label="Checkbox for following text input"
-                />
-                <p class="post__selection__text">Все обсуждения</p>
-              </span>
-        </div>
-        <div class="post__selection__input">
-              <span>
-                <input
-                    class="form-check-input mt-0 border-white bg-dark"
-                    type="checkbox"
-                    value=""
-                    aria-label="Checkbox for following text input"
-                />
-                <p class="post__selection__text">Все обсуждения</p>
-              </span>
-        </div>
-      </div>
-    </aside>
-    <aside class="technical__section">
-      <div class="language__selection">
-        <p class="language__selection__name">Технический раздел</p>
-        <div class="mail">
-              <span>
-                <p class="gray">Почта для жалоб</p>
-                <p class="white">egor3k3@mail.ru</p>
-              </span>
-        </div>
-        <span class="creators">
-              <p>Forum software by Fejoni<br> and L0gan74 @2022 Fejoni</p>
-            </span>
-      </div>
-    </aside>
+    </div>
   </div>
 
-  <!--<ul>-->
-  <!--  <li v-for="aside in asides" :key="aside">-->
-  <!--    {{aside.title }} - {{ aside.id }}-->
-  <!--    <ul>-->
-  <!--      <li v-for="subject in aside.subjects" :key="subject" style="color: #191919">-->
-  <!--        {{subject.title}}-->
-  <!--      </li>-->
-  <!--    </ul>-->
-  <!--  </li>-->
-  <!--</ul>-->
+
+<!--  <ul>-->
+<!--    <li v-for="post in posts" :key="post.id">-->
+<!--      <router-link :to="`/admin/post/${post.id}`">{{ post.title }}</router-link>-->
+<!--    </li>-->
+<!--  </ul>-->
 </template>
 
 <script>
@@ -108,7 +43,6 @@ export default {
     api.get('sanctum/csrf-cookie').then(res => {
       api.get('api/v1/site/aside/get').then(res2 => {
         this.asides = res2.data.data
-        console.log(res2.data.data)
       }).catch(error => {
         console.log(Object.keys(error.response.data.errors)[0])
       })
@@ -120,142 +54,93 @@ export default {
 
 <style scoped>
 
-aside {
-  margin-top: 25px;
-  width: 196px;
-  height: auto;
-  background: #191919;
-  border-radius: 15px;
-  padding: 20px 0;
+.mainColor {
+  background-color: #191919;
 }
 
-aside .button {
+.aside-menu {
+  background: #191919;
+  border-radius: 15px;
+  width: 196px;
+  height: auto;
+  padding: 20px 5px;
+}
+
+.create-a__post {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.create-a__post button {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 15px;
+  color: #ffffff;
   width: 156px;
   height: 30px;
   background: #00ba78;
   border-radius: 10px;
+  border: 0;
+}
+
+button:hover {
+  transition: 1s;
+  background: #00ba66;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5);
+}
+ul {
+  padding: 0 !important;
+}
+
+ul li {
+  list-style-type: none;
+}
+
+.aside-link {
+  text-decoration: none;
+  color: white;
+  height: 100%;
+  align-items: center;
+  display: flex;
+  padding-left: 10px;
+  font-size: 13px;
+  border-radius: 10px;
+}
+
+.name-post {
+  padding: 0 0 10px 10px;
+  margin: 0;
+  font-style: normal;
   font-weight: 500;
   font-size: 13px;
   line-height: 15px;
-  color: #ffffff;
-  border: none;
+  color: #949494;
 }
 
-.post__selection {
-  padding-top: 25px;
-  background-color: #191919;
+.post-guidance li {
+  height: 35px;
 }
 
-.post__selection__input {
-  padding: 5px 10px 0 10px;
-  background-color: #191919;
+.post-guidance a::before {
+  content: "";
+  float: left;
+  width: 25px;
+  height: 25px;
+  background: white;
+  left: 10px;
+  margin-right: 10px;
+  color: white;
 }
 
-.post__selection__input span:hover {
+.post-guidance li:hover {
   background: #313131;
   border-radius: 10px;
 }
 
-.post__selection__text:hover {
+.aside-link:hover {
+  color: #919191;
   background-color: #313131;
 }
 
-
-.post__selection__input input {
-  width: 25px;
-  height: 25px;
-  border: none;
-}
-
-.post__selection__input span {
-  display: flex;
-  padding: 5px 10px;
-  background-color: #191919;
-}
-
-.post__selection__text {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 13px;
-  line-height: 15px;
-  color: #ffffff;
-  margin: 0;
-  position: relative;
-  top: 5px;
-  left: 10px;
-  background-color: #191919;
-}
-
-.language__selection__name {
-  font-style: normal;
-  font-weight: 500;
-  font-size: 13px;
-  line-height: 15px;
-  display: flex;
-  align-items: center;
-  color: #949494;
-  padding: 15px 0 10px 20px;
-  margin: 0;
-  background-color: #191919;
-}
-
-.technical__section {
-  margin-top: 20px;
-}
-
-.mail {
-  text-align: left;
-  background-color: #191919;
-}
-
-.mail span p {
-  font-style: normal;
-  font-weight: 500;
-  font-size: 13px;
-  line-height: 15px;
-  display: flex;
-  align-items: center;
-  background-color: #191919;
-}
-
-.mail span {
-  padding: 32px 0 0 20px;
-  background-color: #191919;
-}
-
-.gray {
-  color: #949494;
-  margin: 0;
-  padding: 0 0 2px 20px;
-}
-
-.white {
-  color: #ffffff;
-  padding: 0 0 2px 20px;
-}
-
-.basic__information {
-  margin-right: 35px;
-}
-
-.block__user {
-  padding: 7px 13px 0 0;
-}
-
-.creators p {
-  font-style: normal;
-  font-weight: 500;
-  font-size: 10px;
-  line-height: 12px;
-  display: flex;
-  align-items: center;
-  text-align: left;
-  color: #949494;
-  padding-left: 20px;
-  background-color: #191919;
-}
-
-.language__selection {
-  background-color: #191919;
-}
 </style>
