@@ -1,58 +1,58 @@
 <template>
-  <main class="col-xl-10">
+  <main class="col-xl-10 mainColor">
     <section>
-      <div class="post__description">
-        <div class="basic__information">
-          <div class="post__title">
-            <p>
+      <div class="post__description mainColor">
+        <div class="basic__information mainColor">
+          <div class="post__title mainColor">
+            <p class="mainColor">
               Luminous Team | Холодки 70/30 | Автокрипт (FUD 0-3/26) | Не
               забираем запросов в какоми...
             </p>
           </div>
-          <div class="post__language">
-            <div class="php">
-              <p>PHP</p>
+          <div class="post__language mainColor">
+            <div class="php mainColor">
+              <p class="mainColor">PHP</p>
             </div>
-            <div class="javascript">
-              <p>JavaScript</p>
+            <div class="javascript mainColor">
+              <p class="mainColor">JavaScript</p>
             </div>
           </div>
         </div>
-        <div class="block__user">
-          <div class="report"></div>
-          <div class="user__information">
-            <div class="user__photo"></div>
-            <div class="user__row">
-              <p class="user__name">Fejoni</p>
-              <p class="user__data">Только что</p>
+        <div class="block__user mainColor">
+          <div class="report mainColor"></div>
+          <div class="user__information mainColor">
+            <div class="user__photo mainColor"></div>
+            <div class="user__row mainColor">
+              <p class="user__name mainColor">Fejoni</p>
+              <p class="user__data mainColor">Только что</p>
             </div>
           </div>
         </div>
       </div>
-      <div class="post__description">
-        <div class="basic__information">
-          <div class="post__title">
-            <p>
+      <div class="post__description mainColor">
+        <div class="basic__information mainColor">
+          <div class="post__title mainColor">
+            <p class="mainColor">
               Luminous Team | Холодки 70/30 | Автокрипт (FUD 0-3/26) | Не
               забираем запросов в какоми...
             </p>
           </div>
-          <div class="post__language">
-            <div class="php">
-              <p>PHP</p>
+          <div class="post__language mainColor">
+            <div class="php mainColor">
+              <p class="mainColor">PHP</p>
             </div>
-            <div class="javascript">
-              <p>JavaScript</p>
+            <div class="javascript mainColor">
+              <p class="mainColor">JavaScript</p>
             </div>
           </div>
         </div>
-        <div class="block__user">
-          <div class="report"></div>
-          <div class="user__information">
-            <div class="user__photo"></div>
-            <div class="user__row">
-              <p class="user__name">Fejoni</p>
-              <p class="user__data">Только что {{ info }}</p>
+        <div class="block__user mainColor">
+          <div class="report mainColor"></div>
+          <div class="user__information mainColor">
+            <div class="user__photo mainColor"></div>
+            <div class="user__row mainColor">
+              <p class="user__name mainColor">Fejoni</p>
+              <p class="user__data mainColor">Только что {{ info }}</p>
             </div>
           </div>
         </div>
@@ -83,6 +83,10 @@ export default {
 </script>
 
 <style scoped>
+
+.mainColor{
+  background: #191919;
+}
 
 main {
   padding-top: 25px;

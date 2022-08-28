@@ -17,7 +17,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.js'
 // Components
 import Default from "@/layouts/Default";
 import Auth from "@/layouts/Auth";
-
+import Admin from "@/layouts/Admin";
 
 createApp(App)
     .use(store)
@@ -25,6 +25,7 @@ createApp(App)
     .use(VueAxios,axios)
     .component("default-layout", Default)
     .component("auth-layout", Auth)
+    .component("admin-layout", Admin)
     .mount('#app')
 
 function isLoggedIn() {

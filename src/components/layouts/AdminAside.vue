@@ -1,53 +1,29 @@
 <template>
   <div class="row">
-    <div class="col-xl-2 ">
+    <div class="col-xl-2">
       <div class="aside-menu mainColor mainSetting">
         <div class="create-a__post mainColor">
-          <button type="button">Создать пост</button>
+          <router-link class="btn-route-list" to="/admin"><button type="button">Главная</button></router-link>
         </div>
         <div class="posts mainColor">
           <ul class="post-main post-guidance mainColor">
-            <li class="mainColor"><a class="aside-link mainColor" href="#">Все обсуждения</a></li>
-            <li class="mainColor"><a class="aside-link mainColor" href="#">Мои темы</a></li>
-          </ul>
-          <ul v-for="aside in asides" :key="aside.id" class="post-branches post-guidance mainColor">
-            <p class="name-post mainColor">{{ aside.title }}</p>
-              <li v-for="subject in aside.subjects" :key="subject.id" class="mainColor"><router-link to="#" class="aside-link mainColor">{{ subject.title }}</router-link></li>
+            <li class="mainColor"><router-link  class="aside-link mainColor" to="/admin/user">Пользователи</router-link></li>
+            <li class="mainColor"><router-link class="aside-link mainColor" to="/admin/posts">Посты</router-link></li>
           </ul>
         </div>
       </div>
     </div>
   </div>
-
-
-<!--  <ul>-->
-<!--    <li v-for="post in posts" :key="post.id">-->
-<!--      <router-link :to="`/admin/post/${post.id}`">{{ post.title }}</router-link>-->
-<!--    </li>-->
-<!--  </ul>-->
 </template>
 
 <script>
-import api from "@/api/api";
 
 export default {
-  name: "Aside",
+  name: "AdminAside",
 
   data() {
-    return {
-      asides: []
-    }
+    return {}
   },
-
-  mounted() {
-    api.get('sanctum/csrf-cookie').then(res => {
-      api.get('api/v1/site/aside/get').then(res2 => {
-        this.asides = res2.data.data
-      }).catch(error => {
-        console.log(Object.keys(error.response.data.errors)[0])
-      })
-    })
-  }
 }
 
 </script>
@@ -57,6 +33,13 @@ export default {
 .mainSetting {
   border: 1px solid #313131;
   border-radius: 10px;
+}
+
+.btn-route-list {
+  color: white;
+  background-color: #00ba78;
+  text-decoration: none;
+  font-size: 13px;
 }
 
 .mainColor {
@@ -94,6 +77,7 @@ button:hover {
   background: #00ba66;
   box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5);
 }
+
 ul {
   padding: 0 !important;
 }

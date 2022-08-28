@@ -1,5 +1,4 @@
 <template>
-  <router-link to="/admin/posts" class="text-decoration-none btn btn-outline-primary mb-3 me-3 btn-sm">Посты</router-link>
   <h1>Admin</h1>
   <div class="container">
     <CreateTheme></CreateTheme>

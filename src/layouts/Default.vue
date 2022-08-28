@@ -5,8 +5,8 @@
         <div class="col-2">
           <Aside></Aside>
         </div>
-        <div class="col-10">
-          <section class="content">
+        <div class="col-10 mainSetting">
+          <section class="content mainColor">
             <slot />
           </section>
         </div>
@@ -28,4 +28,14 @@ export default {
 
 <style scoped>
 
+.mainColor {
+  background: #191919;
+  border-color: #42b983;
+}
+
+.mainSetting {
+  background: #191919;
+  border-radius: 10px;
+  border: 1px solid #313131;
+}
 </style>
