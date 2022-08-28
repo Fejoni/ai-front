@@ -1,20 +1,14 @@
 <template>
   <main class="col-xl-10 mainColor">
     <section>
-      <div class="post__description mainColor">
+      <div v-for="post in posts" :key="post.id" class="post__description mainColor">
         <div class="basic__information mainColor">
           <div class="post__title mainColor">
-            <p class="mainColor">
-              Luminous Team | Холодки 70/30 | Автокрипт (FUD 0-3/26) | Не
-              забираем запросов в какоми...
-            </p>
+            <p class="mainColor">{{ post.title }}</p>
           </div>
           <div class="post__language mainColor">
             <div class="php mainColor">
-              <p class="mainColor">PHP</p>
-            </div>
-            <div class="javascript mainColor">
-              <p class="mainColor">JavaScript</p>
+              <p class="mainColor">{{ post.subject.title}}</p>
             </div>
           </div>
         </div>
@@ -23,36 +17,9 @@
           <div class="user__information mainColor">
             <div class="user__photo mainColor"></div>
             <div class="user__row mainColor">
-              <p class="user__name mainColor">Fejoni</p>
-              <p class="user__data mainColor">Только что</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="post__description mainColor">
-        <div class="basic__information mainColor">
-          <div class="post__title mainColor">
-            <p class="mainColor">
-              Luminous Team | Холодки 70/30 | Автокрипт (FUD 0-3/26) | Не
-              забираем запросов в какоми...
-            </p>
-          </div>
-          <div class="post__language mainColor">
-            <div class="php mainColor">
-              <p class="mainColor">PHP</p>
-            </div>
-            <div class="javascript mainColor">
-              <p class="mainColor">JavaScript</p>
-            </div>
-          </div>
-        </div>
-        <div class="block__user mainColor">
-          <div class="report mainColor"></div>
-          <div class="user__information mainColor">
-            <div class="user__photo mainColor"></div>
-            <div class="user__row mainColor">
-              <p class="user__name mainColor">Fejoni</p>
-              <p class="user__data mainColor">Только что {{ info }}</p>
+              <p class="user__name mainColor">{{ post.user }}</p>
+              <p class="user__data mainColor">{{ post.created_at_time }}</p>
+              <p class="user__data mainColor">{{ post.created_at_year }}</p>
             </div>
           </div>
         </div>
@@ -69,22 +36,30 @@ export default {
   name: 'HomeView',
   data() {
     return {
-      name: null,
+      posts: [],
     }
   },
-  components: {
 
-  },
-  methods: {
-  },
+  components: {},
+
+  methods: {},
+
   mounted() {
+    api.get('sanctum/csrf-cookie').then(res => {
+      api.get('api/v1/site/post/list').then(res => {
+        this.posts = res.data.data
+      }).catch(error => {
+        const key = Object.keys(error.response.data.errors)[0]
+        this.errorMessage = error.response.data.errors[key][0]
+      })
+    })
   }
 }
 </script>
 
 <style scoped>
 
-.mainColor{
+.mainColor {
   background: #191919;
 }
 
