@@ -61,6 +61,14 @@ export default {
           this.errorMessage = error.response.data.errors[key][0]
         })
     }
+  },
+
+  mounted() {
+    api.get('sanctum/csrf-cookie').then(res => {
+      api.get('api/v1/admin/user/data/3').then(res2 => {
+        console.log(res2.data.data)
+      })
+    })
   }
 }
 </script>

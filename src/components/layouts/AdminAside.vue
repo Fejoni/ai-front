@@ -9,6 +9,7 @@
           <ul class="post-main post-guidance mainColor">
             <li class="mainColor"><router-link  class="aside-link mainColor" to="/admin/user">Пользователи</router-link></li>
             <li class="mainColor"><router-link class="aside-link mainColor" to="/admin/posts">Посты</router-link></li>
+            <li class="mainColor"><router-link class="aside-link mainColor" to="/admin/test/poligon">Полигон</router-link></li>
           </ul>
         </div>
       </div>

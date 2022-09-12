@@ -5,6 +5,7 @@ import Register from "@/views/auth/Register";
 import Post from "@/views/admin/post/Post";
 import PostCreate from "@/views/admin/post/PostCreate";
 import ViewPost from "@/components/Post/ViewPost";
+import Poligon from "@/views/admin/test/Poligon";
 
 // Admin Panel
 import Admin from "@/views/admin/admin";
@@ -66,6 +67,13 @@ const routes = [
         path: '/admin/post/create',
         name: 'postCreate',
         component: PostCreate,
+        meta: {requiresAuth: true, layout: "admin-layout"}
+    },
+
+    {
+        path: '/admin/test/poligon',
+        name: 'Poligon',
+        component: Poligon,
         meta: {requiresAuth: true, layout: "admin-layout"}
     },
 
