@@ -6,6 +6,8 @@ import Post from "@/views/admin/post/Post";
 import PostCreate from "@/views/admin/post/PostCreate";
 import ViewPost from "@/components/Post/ViewPost";
 import Poligon from "@/views/admin/test/Poligon";
+import UserDataBase from "@/views/admin/database/UserDataBase";
+import LayoutDataBase from "@/views/admin/database/LayoutDataBase";
 
 // Admin Panel
 import Admin from "@/views/admin/admin";
@@ -15,7 +17,7 @@ import FindUser from "@/views/admin/user/functions/FindUser";
 
 const routes = [
     {
-        path: '/home',
+        path: '/',
         name: 'home',
         component: HomeView,
         meta: {layout: "default-layout"}
@@ -36,9 +38,9 @@ const routes = [
     },
 
     {
-        path: '/admin/user/find',
-        name: 'findUser',
-        component: FindUser,
+        path: '/admin/database',
+        name: 'LayoutDataBase',
+        component: LayoutDataBase,
         meta: {requiresAuth: true, layout: "admin-layout"}
     },
 
@@ -46,6 +48,20 @@ const routes = [
         path: '/admin/user',
         name: 'userPAdmin',
         component: UserPAdmin,
+        meta: {requiresAuth: true, layout: "admin-layout"}
+    },
+
+    {
+        path: '/admin/database/user',
+        name: 'UserDataBase',
+        component: UserDataBase,
+        meta: {requiresAuth: true, layout: "admin-layout"}
+    },
+
+    {
+        path: '/admin/user/find',
+        name: 'findUser',
+        component: FindUser,
         meta: {requiresAuth: true, layout: "admin-layout"}
     },
 

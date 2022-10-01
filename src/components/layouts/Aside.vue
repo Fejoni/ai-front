@@ -35,17 +35,13 @@ export default {
 
   data() {
     return {
-      asides: []
+      asides: JSON.parse(localStorage.getItem('aside'))
     }
   },
 
   mounted() {
-    api.get('sanctum/csrf-cookie').then(res => {
-      api.get('api/v1/site/aside/get').then(res2 => {
-        this.asides = res2.data.data
-      }).catch(error => {
-        console.log(Object.keys(error.response.data.errors)[0])
-      })
+    api.get('api/v1/aside/get').then(res => {
+      localStorage.setItem('aside', JSON.stringify(res.data.data))
     })
   }
 }

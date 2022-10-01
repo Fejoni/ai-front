@@ -29,12 +29,12 @@
             </a>
           </div>
           <div class="collapse navbar-collapse mainColorHeader" id="navbarTogglerDemo01">
-            <router-link class="mainColorHeader" to="/home"><span class="mainColorHeader"><img class="logo" :src="logo">
+            <router-link class="mainColorHeader" to="/"><span class="mainColorHeader"><img class="logo" :src="logo">
                 <p class="logo-text mainColorHeader">Assistant-IT</p></span>
             </router-link>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item mainColorHeader">
-                <router-link to="/home"><a class="nav--link mainColorHeader" aria-current="page"
+                <router-link to="/"><a class="nav--link mainColorHeader" aria-current="page"
                                            href="#">Главная</a></router-link>
               </li>
               <li class="nav-item mainColorHeader">
@@ -42,7 +42,7 @@
               </li>
             </ul>
             <div class="register mainColorHeader">
-              <a href="#" style="background: #191919">
+              <a v-if="!isLoggedIn" href="#" style="background: #191919">
                 <router-link class="mainColorHeader" to="/login">
                   <button type="submit" class="entrance">Войти</button>
                 </router-link>
@@ -50,16 +50,16 @@
               <a href="#">
                 <router-link class="mainColorHeader" to="/admin">
                   <button style="background: #191919" type="submit" class="registration mainColorHeader">
-                    Админ
+                    <span style="color: #949494">Админ</span>
                   </button>
                 </router-link>
               </a>
-              <a style="background: #191919" href="#">
+              <a v-if="!isLoggedIn" style="background: #191919" href="#">
                 <router-link class="mainColorHeader" to="/register">
                   <button style="background: #191919" type="submit" class="registration">Зарегистрироваться</button>
                 </router-link>
               </a>
-              <a style="background: #191919" href="#">
+              <a v-if="isLoggedIn" style="background: #191919" href="#">
                 <router-link class="mainColorHeader" to="/home">
                   <button style="background: #191919" type="submit" class="registration" @click="logout">Выйти</button>
                 </router-link>
@@ -82,6 +82,7 @@ export default {
   data() {
     return {
       name: null,
+      isLoggedIn: localStorage.getItem('isLoggedIn'),
     }
   },
 
@@ -108,6 +109,7 @@ export default {
 </script>
 
 <style scoped>
+
 
 body {
   margin: 0;
