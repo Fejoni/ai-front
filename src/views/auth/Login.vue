@@ -56,7 +56,7 @@ export default {
           return api.get('api/v1/user').then(res3 => {
             localStorage.setItem('user', JSON.stringify(res3.data))
             localStorage.setItem('isLoggedIn', 'true')
-            this.$router.push({name: 'about'})
+            this.$router.push({name: 'home'})
           })
         }).catch(error => {
           const key = Object.keys(error.response.data.errors)[0]

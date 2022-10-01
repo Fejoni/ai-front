@@ -8,7 +8,7 @@
           </div>
           <div class="post__language mainColor">
             <div class="php mainColor">
-              <p class="mainColor">{{ post.subject.title}}</p>
+              <p class="mainColor">{{ post.subject.title }}</p>
             </div>
           </div>
         </div>
@@ -45,14 +45,14 @@ export default {
   methods: {},
 
   mounted() {
-    api.get('sanctum/csrf-cookie').then(res => {
-      api.get('api/v1/site/post/list').then(res => {
-        this.posts = res.data.data
-      }).catch(error => {
-        const key = Object.keys(error.response.data.errors)[0]
-        this.errorMessage = error.response.data.errors[key][0]
-      })
+
+    api.get('api/v1/getData/post/list').then(res => {
+      this.posts = res.data.data
+    }).catch(error => {
+      const key = Object.keys(error.response.data.errors)[0]
+      this.errorMessage = error.response.data.errors[key][0]
     })
+
   }
 }
 </script>

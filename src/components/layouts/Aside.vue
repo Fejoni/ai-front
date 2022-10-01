@@ -40,9 +40,11 @@ export default {
   },
 
   mounted() {
-    api.get('api/v1/aside/get').then(res => {
-      localStorage.setItem('aside', JSON.stringify(res.data.data))
-    })
+    if (!localStorage.getItem('aside')) {
+      api.get('api/v1/getData/aside/get').then(res => {
+        localStorage.setItem('aside', JSON.stringify(res.data.data))
+      })
+    }
   }
 }
 

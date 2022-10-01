@@ -42,16 +42,16 @@
               </li>
             </ul>
             <div class="register mainColorHeader">
+              <a href="#" class="textCenter">
+                <router-link class="mainColorHeader" to="/admin">
+                  <button style="background: #191919" type="submit" class="registration mainColorHeader">
+                    <span style="color: #949494">Админ Панель</span>
+                  </button>
+                </router-link>
+              </a>
               <a v-if="!isLoggedIn" href="#" style="background: #191919">
                 <router-link class="mainColorHeader" to="/login">
                   <button type="submit" class="entrance">Войти</button>
-                </router-link>
-              </a>
-              <a href="#">
-                <router-link class="mainColorHeader" to="/admin">
-                  <button style="background: #191919" type="submit" class="registration mainColorHeader">
-                    <span style="color: #949494">Админ</span>
-                  </button>
                 </router-link>
               </a>
               <a v-if="!isLoggedIn" style="background: #191919" href="#">
@@ -82,7 +82,7 @@ export default {
   data() {
     return {
       name: null,
-      isLoggedIn: localStorage.getItem('isLoggedIn'),
+      isLoggedIn: null,
     }
   },
 
@@ -96,6 +96,10 @@ export default {
     api.get('api/v1/user').then(res => {
       this.name = res.data.name
     })
+
+    if (localStorage.getItem('isLoggedIn')){
+      this.isLoggedIn = localStorage.getItem('isLoggedIn')
+    }
   },
   methods: {
     logout() {
@@ -110,6 +114,12 @@ export default {
 
 <style scoped>
 
+.textCenter {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
 
 body {
   margin: 0;
